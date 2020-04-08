@@ -6,13 +6,12 @@ using UnityEngine.Android;
 public class Resize : MonoBehaviour
 {
     Vector3 size;
-    //Vector3 rotation;
+    Vector3 rotation = new Vector3(0f, 0f, 100f);
 
     // Start is called before the first frame update
     void Start()
     {
         size = this.transform.localScale;
-        //rotation = this.transform.eulerAngles;
     }
 
     // Update is called once per frame
@@ -23,7 +22,7 @@ public class Resize : MonoBehaviour
             Debug.Log("it works");
             size.y += 0.05f;
             size.x += 0.05f;
-            //rotation.z += 0.05f;
+            this.transform.Rotate(rotation * Time.deltaTime);
             this.transform.localScale = size;
         }
     }
