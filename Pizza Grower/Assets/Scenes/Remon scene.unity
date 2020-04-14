@@ -121,6 +121,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1014428632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1014428634}
+  - component: {fileID: 1014428633}
+  m_Layer: 0
+  m_Name: scripthandeler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1014428633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014428632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24bb1275c8e270644ba13aab876657f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texture: {fileID: 1203776568}
+  pizzaSprites:
+  - {fileID: 21300000, guid: 409a92d31783ad8439c45c14fd27420c, type: 3}
+  - {fileID: 21300000, guid: f11a4991dbb2c1f438803dbab4689e9f, type: 3}
+  - {fileID: 21300000, guid: 320cca624d6ba5241acdb50075f0643a, type: 3}
+  - {fileID: 21300000, guid: 903becb262d57de4b881427ed2d7a561, type: 3}
+--- !u!4 &1014428634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014428632}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.20562313, y: 0.32647535, z: -11.982265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1203776566
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +182,7 @@ GameObject:
   - component: {fileID: 1203776568}
   - component: {fileID: 1203776567}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: pizza
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,8 +239,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 903becb262d57de4b881427ed2d7a561, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
