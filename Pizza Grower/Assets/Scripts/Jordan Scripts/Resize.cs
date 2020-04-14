@@ -20,8 +20,8 @@ public class Resize : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Debug.Log("it works");
-            size.y += 0.05f;
-            size.x += 0.05f;
+            size.y += 0.03f;
+            size.x += 0.03f;
             this.transform.Rotate(rotation * Time.deltaTime);
             this.transform.localScale = size;
         }
