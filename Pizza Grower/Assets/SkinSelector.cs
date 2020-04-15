@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SkinSelector : MonoBehaviour
 {
+    [Header("Pizza/Box Content Box")]
+    [SerializeField] private GameObject pizzaParent;
+    [SerializeField] private GameObject boxParent;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -36,5 +40,17 @@ public class SkinSelector : MonoBehaviour
         {
             PlayerPrefs.SetInt("Skin", 4);
         }
+    }
+
+    public void OpenPizzas()
+    {
+        boxParent.SetActive(false);
+        pizzaParent.SetActive(true);
+    }
+
+    public void OpenBoxes()
+    {
+        pizzaParent.SetActive(false);
+        boxParent.SetActive(true);
     }
 }

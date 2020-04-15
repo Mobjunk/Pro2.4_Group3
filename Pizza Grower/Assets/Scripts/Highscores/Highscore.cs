@@ -16,7 +16,9 @@ public class Highscore : JsonHandler<HighscoreEntry>
      [SerializeField] private GameObject highscorePrefab;
      [SerializeField] private GameObject highscoreParent;
      [SerializeField] private GameObject grid;
+     [Header("Highscore entries loaded")]
      [SerializeField] private bool hasLoaded = false;
+     [Header("Sorting the list")]
      [SerializeField] private string sortingBy = "Default";
      
      /// <summary>
