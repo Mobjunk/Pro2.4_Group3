@@ -41,5 +41,30 @@ public class SkinSetter : MonoBehaviour
         {
             texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[3];
         }
+        
+        if(PlayerPrefs.GetInt("Skin") == 5)
+        {
+            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[4];
+        }
+        
+        if(PlayerPrefs.GetInt("Skin") == 6)
+        {
+            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[5];
+        }
+        
+        if(PlayerPrefs.GetInt("Skin") == 7)
+        {
+            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[6];
+        }
+        
+        if(PlayerPrefs.GetInt("Skin") == 8)
+        {
+            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[7];
+        }
+        
+        if(PlayerPrefs.GetInt("Skin") == 9)
+        {
+            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[8];
+        }
     }
 }

@@ -39,6 +39,31 @@ public class SkinSelector : MonoBehaviour
         if(skinNum == 4)
         {
             PlayerPrefs.SetInt("Skin", 4);
+        } 
+        
+        if(skinNum == 5)
+        {
+            PlayerPrefs.SetInt("Skin", 5);
+        }
+        
+        if(skinNum == 6)
+        {
+            PlayerPrefs.SetInt("Skin", 6);
+        } 
+        
+        if(skinNum == 7)
+        {
+            PlayerPrefs.SetInt("Skin", 7);
+        } 
+        
+        if(skinNum == 8)
+        {
+            PlayerPrefs.SetInt("Skin", 8);
+        } 
+        
+        if(skinNum == 9)
+        {
+            PlayerPrefs.SetInt("Skin", 9);
         }
     }
 
