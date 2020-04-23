@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Nighel.unity
+    guid: dc686a688decadf4c80b8b9a12ddf56e
+  - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
     guid: 037b2dff6f1d8b14284ff84487622429
   - enabled: 1

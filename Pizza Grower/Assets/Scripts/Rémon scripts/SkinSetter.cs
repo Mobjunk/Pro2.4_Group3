@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkinSetter : MonoBehaviour
 {
 
-    public SpriteRenderer texture;
+    public Image texture;
 
     public List<Sprite> pizzaSprites = new List<Sprite>();
     // Start is called before the first frame update
@@ -22,49 +23,6 @@ public class SkinSetter : MonoBehaviour
 
     public void SkinChecker()
     {
-        if(PlayerPrefs.GetInt("Skin") == 1)
-        {
-            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[0];
-        }
-        
-        if(PlayerPrefs.GetInt("Skin") == 2)
-        {
-            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[1];
-        }
-        
-        if(PlayerPrefs.GetInt("Skin") == 3)
-        {
-            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[2];
-        }
-        
-        if(PlayerPrefs.GetInt("Skin") == 4)
-        {
-            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[3];
-        }
-        
-        if(PlayerPrefs.GetInt("Skin") == 5)
-        {
-            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[4];
-        }
-        
-        if(PlayerPrefs.GetInt("Skin") == 6)
-        {
-            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[5];
-        }
-        
-        if(PlayerPrefs.GetInt("Skin") == 7)
-        {
-            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[6];
-        }
-        
-        if(PlayerPrefs.GetInt("Skin") == 8)
-        {
-            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[7];
-        }
-        
-        if(PlayerPrefs.GetInt("Skin") == 9)
-        {
-            texture.GetComponent<SpriteRenderer>().sprite = pizzaSprites[8];
-        }
+        texture.sprite = pizzaSprites[PlayerPrefs.GetInt("Skin") - 1];
     }
 }

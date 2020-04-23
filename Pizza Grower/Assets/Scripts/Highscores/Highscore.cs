@@ -45,7 +45,7 @@ public class Highscore : JsonHandler<HighscoreEntry>
      /// <returns>The link where the json file is located</returns>
      protected override string GetLink()
      {
-         return "http://mobstar-sof.com/school/export_highscore.php";
+         return "https://mobstar-sof.com/school/export_highscore.php";
      }
 
      /// <summary>

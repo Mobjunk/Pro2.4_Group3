@@ -9,16 +9,11 @@ public class MainMenuControl : MonoBehaviour
     public GameObject highscoreCanvas;
     public GameObject mainMenuCanas;
     public GameObject custimizationCanas;
+    public GameObject defaultGamemode;
 
     [Header("Name Set Components")]
     public GameObject nameSetCanvas;
     public InputField nameField;
-
-
-    private void Update()
-    {
-        Debug.Log(PlayerPrefs.GetString("Nickname"));
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +22,7 @@ public class MainMenuControl : MonoBehaviour
         optionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
+        defaultGamemode.SetActive(false);
     }
 
     public void Play()
@@ -35,8 +31,9 @@ public class MainMenuControl : MonoBehaviour
         optionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
+        defaultGamemode.SetActive(false);
+        Debug.Log("AAAA");
         nameSetCanvas.SetActive(true);
-        
     }
 
     public void Options()
@@ -45,6 +42,7 @@ public class MainMenuControl : MonoBehaviour
         optionsCanvas.SetActive(true);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
+        defaultGamemode.SetActive(false);
     }
 
     public void Highscore()
@@ -53,6 +51,7 @@ public class MainMenuControl : MonoBehaviour
         optionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(true);
         custimizationCanas.SetActive(false);
+        defaultGamemode.SetActive(false);
     }
 
     public void Custimization()
@@ -61,6 +60,7 @@ public class MainMenuControl : MonoBehaviour
         optionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(true);
+        defaultGamemode.SetActive(false);
     }
 
     public void Back()
@@ -69,6 +69,7 @@ public class MainMenuControl : MonoBehaviour
         optionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
+        defaultGamemode.SetActive(false);
     }
 
 
@@ -82,7 +83,8 @@ public class MainMenuControl : MonoBehaviour
         if (nameField.text != "")
         {
             PlayerPrefs.SetString("Nickname", nameField.text);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            nameSetCanvas.SetActive(false);
+            defaultGamemode.SetActive(true);
         }
     }
 
