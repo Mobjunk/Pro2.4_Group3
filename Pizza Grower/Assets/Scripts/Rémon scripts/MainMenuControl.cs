@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuControl : MonoBehaviour
 {
@@ -8,6 +9,16 @@ public class MainMenuControl : MonoBehaviour
     public GameObject highscoreCanvas;
     public GameObject mainMenuCanas;
     public GameObject custimizationCanas;
+
+    [Header("Name Set Components")]
+    public GameObject nameSetCanvas;
+    public InputField nameField;
+
+
+    private void Update()
+    {
+        Debug.Log(PlayerPrefs.GetString("Nickname"));
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +31,12 @@ public class MainMenuControl : MonoBehaviour
 
     public void Play()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        mainMenuCanas.SetActive(false);
+        optionsCanvas.SetActive(false);
+        highscoreCanvas.SetActive(false);
+        custimizationCanas.SetActive(false);
+        nameSetCanvas.SetActive(true);
+        
     }
 
     public void Options()
@@ -59,6 +75,15 @@ public class MainMenuControl : MonoBehaviour
     public void Quit() 
     {
         Application.Quit();
+    }
+
+    public void NameSave()
+    {
+        if (nameField.text != "")
+        {
+            PlayerPrefs.SetString("Nickname", nameField.text);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
     }
 
 }
