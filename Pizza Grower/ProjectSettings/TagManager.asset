@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Pizza
+  - LinePos1
+  - LinePos2
+  - LinePos3
+  - LinePos4
+  - Fly
   layers:
   - Default
   - TransparentFX
