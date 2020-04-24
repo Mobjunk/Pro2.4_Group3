@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class FlyDetection : MonoBehaviour
 {
-    public static bool AllowFly = true;
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Fly"))
+        if (other.gameObject.CompareTag("Pizza"))
         {
-            AllowFly = false;
+            FlySpawner.AllowFly = false;
+            //Debug.Log("touched");
             // Game Over Screen Code Here;
         }
     }
+
+    
+
 }

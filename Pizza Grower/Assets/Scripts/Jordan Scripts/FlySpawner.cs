@@ -14,8 +14,9 @@ public class FlySpawner : MonoBehaviour
     private float x1;
     private float y1;
     private int number;
-    private float nextSpawn = 2f;
+    private float nextSpawn = 1.5f;
     private float Spawned = 0f;
+    public static bool AllowFly = true;
 
     private void Start()
     {
@@ -27,7 +28,7 @@ public class FlySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (FlyDetection.AllowFly == true)
+        if (AllowFly == true)
         {
             if (Time.time > Spawned)
             {
@@ -40,7 +41,7 @@ public class FlySpawner : MonoBehaviour
     void FlySpawned()
     {
         number = Random.Range(0, 10);
-        if (number > 5)
+        if (number >= 5)
         {      
             x1 = Random.Range(linePos3.x, linePos4.x);
             y1 = Random.Range(linePos3.y, linePos4.y);
