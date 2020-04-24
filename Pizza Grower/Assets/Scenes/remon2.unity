@@ -1383,7 +1383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &253009805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8135,7 +8135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1832581288
 Transform:
   m_ObjectHideFlags: 0
@@ -8164,8 +8164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d2616a89d216f48adbccaa89d8ccee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleEffect: {fileID: 5223418030474739077, guid: c764a440225d878479c8690683fc5b84,
-    type: 3}
+  particleFault: {fileID: 0}
+  particlePerfect: {fileID: 0}
   _minSize: {x: 0, y: 0, z: 0}
   _maxSize: {x: 0, y: 0, z: 0}
   _pizza: {fileID: 1412279179}

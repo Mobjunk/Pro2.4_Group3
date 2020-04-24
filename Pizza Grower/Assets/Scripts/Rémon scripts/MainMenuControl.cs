@@ -13,9 +13,7 @@ public class MainMenuControl : MonoBehaviour
 
     [Header("Name Set Components")]
     public GameObject nameSetCanvas;
-    public InputField nameField;
-
-    // Start is called before the first frame update
+    public InputField nameField;    // Start is called before the first frame update
     void Start()
     {
         mainMenuCanas.SetActive(true);

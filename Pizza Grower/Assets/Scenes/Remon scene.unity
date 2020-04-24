@@ -197,7 +197,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1014428634}
   - component: {fileID: 1014428633}
-  - component: {fileID: 1014428635}
   m_Layer: 0
   m_Name: scripthandeler
   m_TagString: Untagged
@@ -217,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bb1275c8e270644ba13aab876657f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 1203776568}
+  texture: {fileID: 0}
   pizzaSprites:
   - {fileID: 21300000, guid: 409a92d31783ad8439c45c14fd27420c, type: 3}
   - {fileID: 21300000, guid: f11a4991dbb2c1f438803dbab4689e9f, type: 3}
@@ -242,19 +241,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1014428635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014428632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b27c77110eaa0a34abf3c85d7a2092a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InputField: {fileID: 0}
 --- !u!1 &1203776566
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35ed5fc6e491e174b97b403cdc5e3265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  size: {x: 0, y: 0, z: 0}
+  isClicking: 0
+  blockInput: 0
 --- !u!212 &1203776568
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -6,6 +6,14 @@ using UnityEngine.Serialization;
 public abstract class GameHandler : MonoBehaviour
 {
     /// <summary>
+    /// The sprite that will be shown if the pizza is too big
+    /// </summary>
+    [SerializeField] private GameObject perfectSprite;    
+    /// <summary>
+    /// The sprite that will be shown if the pizza is too big
+    /// </summary>
+    [SerializeField] private GameObject faultSprite;
+    /// <summary>
     /// A check to see if the pizza box is moving left
     /// </summary>
     private bool movingLeft;
@@ -124,8 +132,16 @@ public abstract class GameHandler : MonoBehaviour
     {
         if (!correct)
         {
+            perfectSprite.SetActive(false);
+            faultSprite.SetActive(true);
+
             Debug.Log("Handle ending the game!");
             return;
+        }
+        if (correct)
+        {
+            perfectSprite.SetActive(true);
+            faultSprite.SetActive(false);
         }
         //TODO: Add score
         //Blocks the clicking input
