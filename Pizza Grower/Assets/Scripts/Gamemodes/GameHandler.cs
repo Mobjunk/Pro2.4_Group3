@@ -72,6 +72,8 @@ public abstract class GameHandler : MonoBehaviour
     
     public virtual void Start()
     {
+        perfectSprite.SetActive(false);
+        faultSprite.SetActive(false);
         _resize = _pizza.GetComponent<Resize>();
         _minSize = _boxHoleMin.transform.localScale;
         _maxSize = new Vector3(_boxHoleMax.transform.localScale.x - 0.125f, _boxHoleMax.transform.localScale.y - 0.125f, _boxHoleMax.transform.localScale.z);
