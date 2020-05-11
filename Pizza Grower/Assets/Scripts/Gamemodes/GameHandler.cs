@@ -49,7 +49,6 @@ public abstract class GameHandler : MonoBehaviour
     /// The score the player has gained
     /// </summary>
     [SerializeField] protected int _score;
-
     /// <summary>
     /// How much time in seconds has passed in the game mode
     /// </summary>
@@ -72,6 +71,8 @@ public abstract class GameHandler : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     public abstract string GameModeName();
+    public abstract bool TimeBased();
+    public abstract int StartTime();
     
     public virtual void Start()
     {

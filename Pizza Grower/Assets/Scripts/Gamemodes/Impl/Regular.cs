@@ -9,6 +9,16 @@ public class Regular : GameHandler
         return "Default";
     }
 
+    public override bool TimeBased()
+    {
+        return false;
+    }
+
+    public override int StartTime()
+    {
+        return 0;
+    }
+
     public override void HandleNicePizza()
     {
 
