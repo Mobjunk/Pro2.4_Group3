@@ -54,6 +54,9 @@ public abstract class GameHandler : MonoBehaviour
     /// How much time in seconds has passed in the game mode
     /// </summary>
     private float _timer;
+    /// <summary>
+    /// How much time in seconds has passed
+    /// </summary>
     [SerializeField] protected int _timePassed;
     /// <summary>
     /// The amount of 'Perfect' pizzas the player has made
@@ -89,19 +92,21 @@ public abstract class GameHandler : MonoBehaviour
         //Checks if the player released the screen/mouse and if there is currently a pizza in progress
         if (!_resize.isClicking && _pizzaInProgress)
         {
-            Debug.Log($"pizza: {_pizza.transform.localScale.magnitude}, minSize: {_minSize.magnitude}, maxSize: {_maxSize.magnitude}");
-            Debug.Log("Pizza was being grown but the click has been released!");
-            if (_pizza.transform.localScale.magnitude < _minSize.magnitude)
+            //Debug.Log($"pizza: {_pizza.transform.localScale.magnitude}, minSize: {_minSize.magnitude}, maxSize: {_maxSize.magnitude}");
+            //Debug.Log("Pizza was being grown but the click has been released!");
+            if (DoesNotMeetRequirments())
             {
-                Debug.Log("Pizza is too small so game over!");
+                //Debug.Log("Pizza is too small so game over!");
                 HandlePizzaCompletion(false);
-            } else if (_pizza.transform.localScale.magnitude >= _minSize.magnitude && _pizza.transform.localScale.magnitude <= _maxSize.magnitude)
+            }
+            else if (MeetsRequirments())
             {
-                Debug.Log("Pizza is not perfect but meets the requirements!");
+                //Debug.Log("Pizza is not perfect but meets the requirements!");
                 HandlePizzaCompletion(true);
-            } else if (_pizza.transform.localScale.magnitude >= _maxSize.magnitude - 0.05 && _pizza.transform.localScale.magnitude <= _maxSize.magnitude + 0.05)
+            }
+            else if (PerfectPizza())
             {
-                Debug.Log("Pizza is the perfect size!");
+                //Debug.Log("Pizza is the perfect size!");
                 HandlePizzaCompletion(true, true);
             }
             _pizzaInProgress = false;
@@ -116,6 +121,9 @@ public abstract class GameHandler : MonoBehaviour
             //Checks if the pizzaz boz has left the screen
             if (_pizzaBox.transform.position.x <= -300)
             {
+                //Hide both sprites
+                perfectSprite.SetActive(false);
+                faultSprite.SetActive(false);
                 //Hide the max size image
                 _boxHoleMax.SetActive(false);
                 //Sets the pizza box back in the middle
@@ -130,6 +138,31 @@ public abstract class GameHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the pizza does not meet the required size
+    /// </summary>
+    /// <returns></returns>
+    protected bool DoesNotMeetRequirments()
+    {
+        return _pizza.transform.localScale.magnitude < _minSize.magnitude || _pizza.transform.localScale.magnitude > _maxSize.magnitude + 0.05;
+    }
+    /// <summary>
+    /// Checks if the pizza meets the required size
+    /// </summary>
+    /// <returns></returns>
+    protected bool MeetsRequirments()
+    {
+        return _pizza.transform.localScale.magnitude >= _minSize.magnitude && _pizza.transform.localScale.magnitude <= _maxSize.magnitude - 0.05;
+    }
+    /// <summary>
+    /// Checks if the pizza has the perfect size
+    /// </summary>
+    /// <returns></returns>
+    protected bool PerfectPizza()
+    {
+        return _pizza.transform.localScale.magnitude >= _maxSize.magnitude - 0.05 && _pizza.transform.localScale.magnitude <= _maxSize.magnitude + 0.05;
+    }
+
     protected virtual void HandlePizzaCompletion(bool correct, bool perfect = false)
     {
         if (!correct)
@@ -140,18 +173,28 @@ public abstract class GameHandler : MonoBehaviour
             Debug.Log("Handle ending the game!");
             return;
         }
-        if (correct)
+        else
         {
             perfectSprite.SetActive(true);
             faultSprite.SetActive(false);
         }
-        //TODO: Add score
         //Blocks the clicking input
         _resize.blockInput = true;
         //Starts moving the pizza box to the left
         movingLeft = true;
         //Increase the pizza counters based on perfection
-        if (perfect) _perfectPizzas++;
-        else _regularPizzas++;
+        if (perfect)
+        {
+            HandlePerfectPizza();
+            _perfectPizzas++;
+        }
+        else
+        {
+            HandleNicePizza();
+            _regularPizzas++;
+        }
     }
+
+    public abstract void HandleNicePizza();
+    public abstract void HandlePerfectPizza();
 }

@@ -30,7 +30,6 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
-        Debug.Log("AAAA");
         nameSetCanvas.SetActive(true);
     }
 

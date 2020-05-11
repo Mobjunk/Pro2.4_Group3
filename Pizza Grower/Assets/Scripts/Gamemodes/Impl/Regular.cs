@@ -8,4 +8,14 @@ public class Regular : GameHandler
     {
         return "Default";
     }
+
+    public override void HandleNicePizza()
+    {
+
+    }
+
+    public override void HandlePerfectPizza()
+    {
+
+    }
 }
