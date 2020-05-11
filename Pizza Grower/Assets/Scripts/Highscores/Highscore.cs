@@ -12,6 +12,8 @@ using UnityEngine.UI;
 
 public class Highscore : JsonHandler<HighscoreEntry>
  {
+    public static Highscore instance;
+
      [Header("Main menu variables")]
      [SerializeField] private GameObject highscorePrefab;
      [SerializeField] private GameObject highscoreParent;
@@ -59,8 +61,9 @@ public class Highscore : JsonHandler<HighscoreEntry>
 
      public override void Start()
      {
-         LoadContent(false);
-         this.hasLoaded = true;
+        instance = this;
+        LoadContent(false);
+        this.hasLoaded = true;
      }
 
      public override void Update()

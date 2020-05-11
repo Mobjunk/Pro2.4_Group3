@@ -10,6 +10,7 @@ public class MainMenuControl : MonoBehaviour
     public GameObject mainMenuCanas;
     public GameObject custimizationCanas;
     public GameObject defaultGamemode;
+    public GameObject testGamemode;
 
     [Header("Name Set Components")]
     public GameObject nameSetCanvas;
@@ -21,6 +22,7 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
+        testGamemode.SetActive(false);
     }
 
     public void Play()
@@ -81,7 +83,8 @@ public class MainMenuControl : MonoBehaviour
         {
             PlayerPrefs.SetString("Nickname", nameField.text);
             nameSetCanvas.SetActive(false);
-            defaultGamemode.SetActive(true);
+            //defaultGamemode.SetActive(true);
+            testGamemode.SetActive(true);
         }
     }
 
