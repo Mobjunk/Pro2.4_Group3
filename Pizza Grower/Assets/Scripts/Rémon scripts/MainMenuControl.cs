@@ -29,6 +29,17 @@ public class MainMenuControl : MonoBehaviour
         testGamemode.SetActive(false);
     }
 
+    public void MainMenu()
+    {
+        mainMenuCanas.SetActive(true);
+        optionsCanvas.SetActive(false);
+        highscoreCanvas.SetActive(false);
+        custimizationCanas.SetActive(false);
+        defaultGamemode.SetActive(false);
+        testGamemode.SetActive(false);
+        buttonClick.Play();
+    }
+
     public void Play()
     {
         mainMenuCanas.SetActive(false);
