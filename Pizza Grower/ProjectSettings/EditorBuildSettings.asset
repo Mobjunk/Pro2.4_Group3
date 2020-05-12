@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/remon2.unity
+    guid: 46aec9bbd329e1046a32ceb9530a5c29
+  - enabled: 0
     path: Assets/Scenes/Nighel.unity
     guid: dc686a688decadf4c80b8b9a12ddf56e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenuScene.unity
     guid: 037b2dff6f1d8b14284ff84487622429
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Remon scene.unity
     guid: b21492e6387a23b478987b0159efd868
   m_configObjects: {}
