@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Serialization;
 
 public abstract class GameHandler : MonoBehaviour
@@ -18,13 +19,17 @@ public abstract class GameHandler : MonoBehaviour
     /// </summary>
     [SerializeField] private AudioSource badPizza;
     /// <summary>
-    /// The sprite that will be shown if the pizza is too big
+    /// The sprite that will be shown if the pizza made correctly
     /// </summary>
-    [SerializeField] private GameObject perfectSprite;    
+    [SerializeField] private GameObject goodSprite;    
     /// <summary>
-    /// The sprite that will be shown if the pizza is too big
+    /// The sprite that will be shown if the pizza is too big or too small
     /// </summary>
     [SerializeField] private GameObject faultSprite;
+    /// <summary>
+    /// The sprite that will be shown if the pizza is perfect size
+    /// </summary>
+    [SerializeField] private GameObject perfectSprite;
     /// <summary>
     /// A check to see if the pizza box is moving left
     /// </summary>
@@ -66,6 +71,10 @@ public abstract class GameHandler : MonoBehaviour
     /// </summary>
     [SerializeField] protected int _score;
     /// <summary>
+    /// The text element for score
+    /// </summary>
+    [SerializeField] protected Text _scoreText;
+    /// <summary>
     /// How much time passed in the game mode
     /// </summary>
     private float _timer;
@@ -104,7 +113,7 @@ public abstract class GameHandler : MonoBehaviour
     public virtual void Start()
     {
         _timeLeft = StartTime();
-        perfectSprite.SetActive(false);
+        goodSprite.SetActive(false);
         faultSprite.SetActive(false);
         GameOverCanvas.SetActive(false);
         _resize = _pizza.GetComponent<Resize>();
@@ -121,6 +130,7 @@ public abstract class GameHandler : MonoBehaviour
         //Update the time passed in the gamemode
         _timer += Time.deltaTime;
         _timePassed = (int)_timer % 60;
+        _scoreText.text = "Score: " + _score;
 
         //Checks if its a time based game mode
         if(TimeBased())
@@ -172,7 +182,7 @@ public abstract class GameHandler : MonoBehaviour
             if (_pizzaBox.transform.position.x <= -300)
             {
                 //Hide both sprites
-                perfectSprite.SetActive(false);
+                goodSprite.SetActive(false);
                 faultSprite.SetActive(false);
                 //Hide the max size image
                 _boxHoleMax.SetActive(false);
@@ -218,8 +228,9 @@ public abstract class GameHandler : MonoBehaviour
         if (!correct)
         {
             
+            goodSprite.SetActive(false);
+            faultSprite.SetActive(true);
             perfectSprite.SetActive(false);
-            faultSprite.SetActive(true); 
             if (!TimeBased())
             { 
                 _gameInProgress = false;
@@ -234,7 +245,7 @@ public abstract class GameHandler : MonoBehaviour
             else
             { 
                 HandleWrongPizza();
-                //GameOverCanvas.SetActive(true);
+                GameOverCanvas.SetActive(true);
                 badPizza.Play();           
             }
            
@@ -242,8 +253,9 @@ public abstract class GameHandler : MonoBehaviour
         else
         {
             goodPizza.Play();
-            perfectSprite.SetActive(true);
+            goodSprite.SetActive(true);
             faultSprite.SetActive(false);
+            perfectSprite.SetActive(false);
         }
         //Blocks the clicking input
         _resize.blockInput = true;
@@ -254,6 +266,9 @@ public abstract class GameHandler : MonoBehaviour
         {
             HandlePerfectPizza();
             _perfectPizzas++;
+            perfectSprite.SetActive(true);
+            goodSprite.SetActive(false);
+            faultSprite.SetActive(false);
         }
         else
         {
