@@ -98,6 +98,9 @@ public abstract class GameHandler : MonoBehaviour
     /// <returns></returns>
     public abstract int StartTime();
     [SerializeField] public float _timeLeft;
+
+    int coins;
+
     public virtual void Start()
     {
         _timeLeft = StartTime();
@@ -266,5 +269,7 @@ public abstract class GameHandler : MonoBehaviour
     {
         _resize.blockInput = true;
         //Highscore.instance.Insert(new HighscoreEntry(_playerName, _score, _timePassed, GameModeName()));
+        coins = _score / 2;
+        Debug.Log("your coins are " + coins);
     }
 }
