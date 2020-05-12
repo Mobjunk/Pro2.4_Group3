@@ -175,7 +175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434449695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.03, y: 2.7, z: 0}
+  m_LocalPosition: {x: 3.22, y: 2.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -686,9 +686,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   box: {fileID: 1311117978}
-  Pizza: {fileID: 2002173724}
+  pizza: {fileID: 0}
+  hole: {fileID: 0}
   minSize: {x: 5, y: 0, z: 0}
   maxSize: {x: 0, y: 0, z: 0}
+  perfect: {x: 0, y: 0, z: 0}
   growthScript: {fileID: 2002173726}
 --- !u!50 &2002173730
 Rigidbody2D:
