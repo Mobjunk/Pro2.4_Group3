@@ -21,17 +21,14 @@ public class TimerChanger : GameHandler
     }
     public override int StartTime()
     {
-        Debug.Log("You not work?");
         return 60;
     }
     public override void HandleNicePizza()
     {
-        Debug.Log("You aight?");
         _timeLeft += 3f;
     }
     public override void HandlePerfectPizza()
     {
-        Debug.Log("You good?");
         _timeLeft += 5f;
     }
     public override void HandleWrongPizza()
@@ -52,7 +49,6 @@ public class TimerChanger : GameHandler
     // Update is called once per frame
     public override void Update()
     {        
-        Debug.Log("sdsdfasdfd");
         gameTimer.text = _timeLeft.ToString("F0");
         base.Update();
     }

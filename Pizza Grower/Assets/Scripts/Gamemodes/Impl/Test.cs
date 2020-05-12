@@ -11,7 +11,7 @@ public class Test : GameHandler
 
     public override bool TimeBased()
     {
-        return true;
+        return false;
     }
 
     public override int StartTime()

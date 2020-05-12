@@ -125,7 +125,13 @@ public abstract class GameHandler : MonoBehaviour
             _timeLeft -= Time.deltaTime;
             if(_timeLeft <= 0)
             {
-                Debug.Log("Ran out of time, show end screen!");
+                _gameInProgress = false;
+                HandleGameOver();
+                GameOverCanvas.SetActive(true);
+                badPizza.Play();
+                _pizza.SetActive(false);
+                _pizzaBox.SetActive(false);
+                Debug.Log("Handle ending the game!");
                 return;
             }
         }
@@ -219,17 +225,16 @@ public abstract class GameHandler : MonoBehaviour
                 badPizza.Play();
                 _pizza.SetActive(false);
                 _pizzaBox.SetActive(false);
+                Debug.Log("Handle ending the game!");
+                return;
             }
             else
+            { 
                 HandleWrongPizza();
-                GameOverCanvas.SetActive(true);
-                badPizza.Play();
-                _pizza.SetActive(false);
-                _pizzaBox.SetActive(false);
-                perfectSprite.SetActive(false);
-                faultSprite.SetActive(false);
-            Debug.Log("Handle ending the game!");
-            return;
+                //GameOverCanvas.SetActive(true);
+                badPizza.Play();           
+            }
+           
         }
         else
         {
