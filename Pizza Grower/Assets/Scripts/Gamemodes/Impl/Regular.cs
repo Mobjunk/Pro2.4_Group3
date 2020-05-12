@@ -28,4 +28,8 @@ public class Regular : GameHandler
     {
 
     }
+    public override void HandleWrongPizza()
+    {
+        throw new System.NotImplementedException();
+    }
 }

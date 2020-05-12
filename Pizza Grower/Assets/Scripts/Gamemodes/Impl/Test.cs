@@ -34,4 +34,8 @@ public class Test : GameHandler
 
         base.HandleGameOver();
     }
+    public override void HandleWrongPizza()
+    {
+        throw new System.NotImplementedException();
+    }
 }
