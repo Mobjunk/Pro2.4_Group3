@@ -10,7 +10,7 @@ public class MainMenuControl : MonoBehaviour
     public GameObject mainMenuCanas;
     public GameObject custimizationCanas;
     public GameObject defaultGamemode;
-    public GameObject testGamemode;
+    public GameObject gameOverCanvas;
 
     [Header("Sounds")]
     public AudioSource buttonClick;
@@ -26,7 +26,7 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
-        testGamemode.SetActive(false);
+        gameOverCanvas.SetActive(false);
     }
 
     public void MainMenu()
@@ -36,7 +36,8 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
-        testGamemode.SetActive(false);
+        gameOverCanvas.SetActive(false);
+        gameOverCanvas.SetActive(false);
         buttonClick.Play();
     }
 
@@ -48,6 +49,7 @@ public class MainMenuControl : MonoBehaviour
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
         nameSetCanvas.SetActive(true);
+        gameOverCanvas.SetActive(false);
         buttonClick.Play();
     }
 
@@ -58,6 +60,7 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
+        gameOverCanvas.SetActive(false);
         buttonClick.Play();
     }
 
@@ -69,7 +72,8 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(true);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
-       
+        gameOverCanvas.SetActive(false);
+
     }
 
     public void Custimization()
@@ -79,6 +83,7 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(true);
         defaultGamemode.SetActive(false);
+        gameOverCanvas.SetActive(false);
         buttonClick.Play();
     }
 
@@ -89,6 +94,7 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
+        gameOverCanvas.SetActive(false);
         buttonClick.Play();
     }
 
@@ -105,8 +111,7 @@ public class MainMenuControl : MonoBehaviour
         {
             PlayerPrefs.SetString("Nickname", nameField.text);
             nameSetCanvas.SetActive(false);
-            //defaultGamemode.SetActive(true);
-            testGamemode.SetActive(true);
+            defaultGamemode.SetActive(true);
         }
     }
 

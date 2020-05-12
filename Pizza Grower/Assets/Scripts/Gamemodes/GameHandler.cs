@@ -6,6 +6,18 @@ using UnityEngine.Serialization;
 public abstract class GameHandler : MonoBehaviour
 {
     /// <summary>
+    /// if you make the pizza to small or to big that the gameover canvas will show
+    /// </summary>
+    [SerializeField] private GameObject GameOverCanvas;
+    /// <summary>
+    /// the sound if a pizza is made correctly
+    /// </summary>
+    [SerializeField] private AudioSource goodPizza;
+    /// <summary>
+    /// the sound if a pizza is made incorrectly
+    /// </summary>
+    [SerializeField] private AudioSource badPizza;
+    /// <summary>
     /// The sprite that will be shown if the pizza is too big
     /// </summary>
     [SerializeField] private GameObject perfectSprite;    
@@ -91,6 +103,7 @@ public abstract class GameHandler : MonoBehaviour
         _timeLeft = StartTime();
         perfectSprite.SetActive(false);
         faultSprite.SetActive(false);
+        GameOverCanvas.SetActive(false);
         _resize = _pizza.GetComponent<Resize>();
         _minSize = _boxHoleMin.transform.localScale;
         _maxSize = new Vector3(_boxHoleMax.transform.localScale.x - 0.125f, _boxHoleMax.transform.localScale.y - 0.125f, _boxHoleMax.transform.localScale.z);
@@ -197,19 +210,30 @@ public abstract class GameHandler : MonoBehaviour
         {
             
             perfectSprite.SetActive(false);
-            faultSprite.SetActive(true);
+            faultSprite.SetActive(true); 
             if (!TimeBased())
             { 
                 _gameInProgress = false;
                 HandleGameOver();
+                GameOverCanvas.SetActive(true);
+                badPizza.Play();
+                _pizza.SetActive(false);
+                _pizzaBox.SetActive(false);
             }
             else
                 HandleWrongPizza();
+                GameOverCanvas.SetActive(true);
+                badPizza.Play();
+                _pizza.SetActive(false);
+                _pizzaBox.SetActive(false);
+                perfectSprite.SetActive(false);
+                faultSprite.SetActive(false);
             Debug.Log("Handle ending the game!");
             return;
         }
         else
         {
+            goodPizza.Play();
             perfectSprite.SetActive(true);
             faultSprite.SetActive(false);
         }
@@ -236,6 +260,6 @@ public abstract class GameHandler : MonoBehaviour
     public virtual void HandleGameOver()
     {
         _resize.blockInput = true;
-        Highscore.instance.Insert(new HighscoreEntry(_playerName, _score, _timePassed, GameModeName()));
+        //Highscore.instance.Insert(new HighscoreEntry(_playerName, _score, _timePassed, GameModeName()));
     }
 }
