@@ -30,4 +30,8 @@ public class Regular : GameHandler
         _score += 3;
         Debug.Log(_score);
     }
+    public override void HandleWrongPizza()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -12,6 +12,10 @@ public class MainMenuControl : MonoBehaviour
     public GameObject defaultGamemode;
     public GameObject testGamemode;
 
+    [Header("Sounds")]
+    public AudioSource buttonClick;
+    public AudioSource quit;
+
     [Header("Name Set Components")]
     public GameObject nameSetCanvas;
     public InputField nameField;    // Start is called before the first frame update
@@ -25,6 +29,17 @@ public class MainMenuControl : MonoBehaviour
         testGamemode.SetActive(false);
     }
 
+    public void MainMenu()
+    {
+        mainMenuCanas.SetActive(true);
+        optionsCanvas.SetActive(false);
+        highscoreCanvas.SetActive(false);
+        custimizationCanas.SetActive(false);
+        defaultGamemode.SetActive(false);
+        testGamemode.SetActive(false);
+        buttonClick.Play();
+    }
+
     public void Play()
     {
         mainMenuCanas.SetActive(false);
@@ -33,6 +48,7 @@ public class MainMenuControl : MonoBehaviour
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
         nameSetCanvas.SetActive(true);
+        buttonClick.Play();
     }
 
     public void Options()
@@ -42,15 +58,18 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
+        buttonClick.Play();
     }
 
     public void Highscore()
     {
+        buttonClick.Play();
         mainMenuCanas.SetActive(false);
         optionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(true);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
+       
     }
 
     public void Custimization()
@@ -60,6 +79,7 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(true);
         defaultGamemode.SetActive(false);
+        buttonClick.Play();
     }
 
     public void Back()
@@ -69,12 +89,14 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
+        buttonClick.Play();
     }
 
 
     public void Quit() 
     {
         Application.Quit();
+        quit.Play();
     }
 
     public void NameSave()

@@ -86,7 +86,6 @@ public abstract class GameHandler : MonoBehaviour
     /// <returns></returns>
     public abstract int StartTime();
     [SerializeField] public float _timeLeft;
-    
     public virtual void Start()
     {
         _timeLeft = StartTime();
@@ -111,7 +110,7 @@ public abstract class GameHandler : MonoBehaviour
         if(TimeBased())
         {
             _timeLeft -= Time.deltaTime;
-            if(_timeLeft < 1)
+            if(_timeLeft <= 0)
             {
                 Debug.Log("Ran out of time, show end screen!");
                 return;
@@ -196,11 +195,16 @@ public abstract class GameHandler : MonoBehaviour
     {
         if (!correct)
         {
+            
             perfectSprite.SetActive(false);
             faultSprite.SetActive(true);
-
-            _gameInProgress = false;
-            HandleGameOver();
+            if (!TimeBased())
+            { 
+                _gameInProgress = false;
+                HandleGameOver();
+            }
+            else
+                HandleWrongPizza();
             Debug.Log("Handle ending the game!");
             return;
         }
@@ -228,6 +232,7 @@ public abstract class GameHandler : MonoBehaviour
 
     public abstract void HandleNicePizza();
     public abstract void HandlePerfectPizza();
+    public abstract void HandleWrongPizza();
     public virtual void HandleGameOver()
     {
         _resize.blockInput = true;
