@@ -6,6 +6,7 @@ using UnityEngine.Android;
 public class PizzaGrower : MonoBehaviour
 {
     public Vector3 size;
+
     Vector3 rotation = new Vector3(0f, 0f, 100f);
 
     public bool Click;
@@ -15,6 +16,7 @@ public class PizzaGrower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //size = this.transform.localScale
         size = this.transform.localScale;
     }
 

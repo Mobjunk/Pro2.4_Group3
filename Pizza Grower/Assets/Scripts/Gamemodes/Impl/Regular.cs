@@ -21,11 +21,13 @@ public class Regular : GameHandler
 
     public override void HandleNicePizza()
     {
-
+        _score++;
+        Debug.Log(_score);
     }
 
     public override void HandlePerfectPizza()
     {
-
+        _score += 3;
+        Debug.Log(_score);
     }
 }
