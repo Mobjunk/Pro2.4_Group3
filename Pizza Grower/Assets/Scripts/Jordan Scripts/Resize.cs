@@ -24,8 +24,8 @@ public class Resize : MonoBehaviour
         isClicking = Input.GetMouseButton(0) && !blockInput;
         if (isClicking && size.x < 1 && size.y < 1)
         {
-            size.y += 0.03f;
-            size.x += 0.03f;
+            size.y += 0.0125f;
+            size.x += 0.0125f;
             transform.Rotate(rotation * Time.deltaTime);
             transform.localScale = size;
         }
