@@ -16,17 +16,30 @@ public class MainMenuControl : MonoBehaviour
     public AudioSource buttonClick;
     public AudioSource quit;
 
-    [Header("Name Set Components")]
-    public GameObject nameSetCanvas;
+    [Header("Name Components")]
     public InputField nameField;    // Start is called before the first frame update
     void Start()
     {
+        nameField.text = PlayerPrefs.GetString("Nickname", nameField.text);
+
         mainMenuCanas.SetActive(true);
         instructionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
         gameOverCanvas.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (nameField.text == "")
+        {
+            //....
+        }
+        if (nameField.text != "")
+        {
+            //....
+        }
     }
 
     public void MainMenu()
@@ -47,8 +60,7 @@ public class MainMenuControl : MonoBehaviour
         instructionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
-        defaultGamemode.SetActive(false);
-        nameSetCanvas.SetActive(true);
+        defaultGamemode.SetActive(true);
         gameOverCanvas.SetActive(false);
         buttonClick.Play();
     }
@@ -110,8 +122,6 @@ public class MainMenuControl : MonoBehaviour
         if (nameField.text != "")
         {
             PlayerPrefs.SetString("Nickname", nameField.text);
-            nameSetCanvas.SetActive(false);
-            defaultGamemode.SetActive(true);
         }
     }
 
