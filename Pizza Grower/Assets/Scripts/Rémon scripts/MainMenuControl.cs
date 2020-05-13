@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MainMenuControl : MonoBehaviour
 {
-    public GameObject optionsCanvas;
+    public GameObject instructionsCanvas;
     public GameObject highscoreCanvas;
     public GameObject mainMenuCanas;
     public GameObject custimizationCanas;
@@ -22,7 +22,7 @@ public class MainMenuControl : MonoBehaviour
     void Start()
     {
         mainMenuCanas.SetActive(true);
-        optionsCanvas.SetActive(false);
+        instructionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
@@ -32,7 +32,7 @@ public class MainMenuControl : MonoBehaviour
     public void MainMenu()
     {
         mainMenuCanas.SetActive(true);
-        optionsCanvas.SetActive(false);
+        instructionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
@@ -44,7 +44,7 @@ public class MainMenuControl : MonoBehaviour
     public void Play()
     {
         mainMenuCanas.SetActive(false);
-        optionsCanvas.SetActive(false);
+        instructionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
@@ -53,10 +53,10 @@ public class MainMenuControl : MonoBehaviour
         buttonClick.Play();
     }
 
-    public void Options()
+    public void Instructions()
     {
         mainMenuCanas.SetActive(false);
-        optionsCanvas.SetActive(true);
+        instructionsCanvas.SetActive(true);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
@@ -68,7 +68,7 @@ public class MainMenuControl : MonoBehaviour
     {
         buttonClick.Play();
         mainMenuCanas.SetActive(false);
-        optionsCanvas.SetActive(false);
+        instructionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(true);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
@@ -79,7 +79,7 @@ public class MainMenuControl : MonoBehaviour
     public void Custimization()
     {
         mainMenuCanas.SetActive(false);
-        optionsCanvas.SetActive(false);
+        instructionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(true);
         defaultGamemode.SetActive(false);
@@ -90,7 +90,7 @@ public class MainMenuControl : MonoBehaviour
     public void Back()
     {
         mainMenuCanas.SetActive(true);
-        optionsCanvas.SetActive(false);
+        instructionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
