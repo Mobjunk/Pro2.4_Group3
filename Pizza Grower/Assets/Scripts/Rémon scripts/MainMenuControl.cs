@@ -10,9 +10,7 @@ public class MainMenuControl : MonoBehaviour
     public GameObject mainMenuCanas;
     public GameObject custimizationCanas;
     public GameObject defaultGamemode;
-    public GameObject flyCatchGamemode;
     public GameObject gameOverCanvas;
-    public GameObject gamemodesCanvas;
 
     [Header("Sounds")]
     public AudioSource buttonClick;
@@ -28,9 +26,7 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
-        flyCatchGamemode.SetActive(false);
         gameOverCanvas.SetActive(false);
-        gamemodesCanvas.SetActive(false);
     }
 
     public void MainMenu()
@@ -102,24 +98,6 @@ public class MainMenuControl : MonoBehaviour
         buttonClick.Play();
     }
 
-    public void flyCatch()
-    {
-        gamemodesCanvas.SetActive(false);
-        flyCatchGamemode.SetActive(true);
-    }
-
-    public void defaultgamemode()
-    {
-        gamemodesCanvas.SetActive(false);
-        defaultGamemode.SetActive(true);
-    }
-
-    /*public void timeLimitedgamemode()
-    {
-        gamemodesCanvas.SetActive(false);
-        timeLimitedGamemode.SetActive(true);
-    }*/
-
 
     public void Quit() 
     {
@@ -133,7 +111,7 @@ public class MainMenuControl : MonoBehaviour
         {
             PlayerPrefs.SetString("Nickname", nameField.text);
             nameSetCanvas.SetActive(false);
-            gamemodesCanvas.SetActive(true);
+            defaultGamemode.SetActive(true);
         }
     }
 

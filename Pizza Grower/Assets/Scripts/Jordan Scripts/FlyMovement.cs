@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FlyMovement : MonoBehaviour
 {
-    public float Speed = 2;
+    float Speed = 2;
     GameObject Pizza;
     float speed = 1;
 
