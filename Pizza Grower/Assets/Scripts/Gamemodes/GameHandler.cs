@@ -55,6 +55,10 @@ public abstract class GameHandler : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject _boxHoleMin, _boxHoleMax;
     /// <summary>
+    /// holds the arary of all flies
+    /// </summary>
+    private GameObject[] flies;
+    /// <summary>
     /// The reference to the resize script
     /// </summary>
     private Resize _resize;
@@ -245,6 +249,11 @@ public abstract class GameHandler : MonoBehaviour
             else
             { 
                 HandleWrongPizza();
+                flies = GameObject.FindGameObjectsWithTag("Fly");
+                foreach(GameObject fly in flies)
+                {
+                    Destroy(fly.gameObject);
+                }
                 GameOverCanvas.SetActive(true);
                 badPizza.Play();           
             }
