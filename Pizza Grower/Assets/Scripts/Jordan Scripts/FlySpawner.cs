@@ -45,14 +45,16 @@ public class FlySpawner : MonoBehaviour
         {      
             x1 = Random.Range(linePos3.x, linePos4.x);
             y1 = Random.Range(linePos3.y, linePos4.y);
-            Instantiate(Fly, new Vector2(x1, y1), Fly.transform.rotation);
+            var fly = Instantiate(Fly, new Vector2(x1, y1), Fly.transform.rotation);
+            fly.transform.parent = gameObject.transform;
             //this.transform.position = new Vector2(x, y);
         }
         else if (number < 5)
         {
             x = Random.Range(linePos1.x, linePos2.x);
             y = Random.Range(linePos1.y, linePos2.y);
-            Instantiate(Fly, new Vector2(x, y), Fly.transform.rotation);
+            var fly = Instantiate(Fly, new Vector2(x, y), Fly.transform.rotation);
+            fly.transform.parent = gameObject.transform;
             //this.transform.position = new Vector2(x, y);
         }
     }

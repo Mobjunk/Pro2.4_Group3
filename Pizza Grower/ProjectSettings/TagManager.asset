@@ -9,6 +9,7 @@ TagManager:
   - LinePos2
   - LinePos3
   - LinePos4
+  - Fly
   layers:
   - Default
   - TransparentFX
