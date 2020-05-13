@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Serialization;
+using System;
 
 public abstract class GameHandler : MonoBehaviour
 {
+    [HideInInspector] public bool _hasBeenLoaded = false;
     /// <summary>
     /// if you make the pizza to small or to big that the gameover canvas will show
     /// </summary>
@@ -33,15 +35,15 @@ public abstract class GameHandler : MonoBehaviour
     /// <summary>
     /// A check to see if the pizza box is moving left
     /// </summary>
-    private bool _movingLeft;
+    protected bool _movingLeft;
     /// <summary>
     /// Checks if a game is currently in progress
     /// </summary>
-    private bool _gameInProgress;
+    protected bool _gameInProgress;
     /// <summary>
     /// The min and max size of the pizza
     /// </summary>
-    [SerializeField] private Vector3 _minSize, _maxSize;
+    protected Vector3 _minSize, _maxSize;
     /// <summary>
     /// The pizza itself
     /// </summary>
@@ -55,46 +57,47 @@ public abstract class GameHandler : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject _boxHoleMin, _boxHoleMax;
     /// <summary>
-    /// holds the arary of all flies
-    /// </summary>
-    private GameObject[] flies;
-    /// <summary>
     /// The reference to the resize script
     /// </summary>
-    private Resize _resize;
+    protected Resize _resize;
     /// <summary>
     /// Checks if there is a pizza being grown
     /// </summary>
-    [SerializeField] private bool _pizzaInProgress = false;
+    protected bool _pizzaInProgress = false;
     /// <summary>
     /// The name of the player
     /// </summary>
-    [SerializeField] protected string _playerName;
+    protected string _playerName;
     /// <summary>
     /// The score the player has gained
     /// </summary>
-    [SerializeField] protected int _score;
+    protected int _score;
     /// <summary>
     /// The text element for score
     /// </summary>
-    [SerializeField] protected Text _scoreText;
+    [SerializeField] Text _scoreText;
     /// <summary>
     /// How much time passed in the game mode
     /// </summary>
-    private float _timer;
+    protected float _timer;
     /// <summary>
     /// How much time in seconds has passed
     /// </summary>
-    [SerializeField] protected int _timePassed;
+    protected int _timePassed;
     /// <summary>
     /// The amount of 'Perfect' pizzas the player has made
     /// </summary>
-    [SerializeField] protected int _perfectPizzas;
+    protected int _perfectPizzas;
     /// <summary>
     /// The amount of 'Nice' pizza's the player has made
     /// So between the min and max size
     /// </summary>
-    [SerializeField] protected int _regularPizzas;
+    protected int _regularPizzas;
+    /// <summary>
+    /// The amount of 'Bad' pizza's the player has made
+    /// This is only used in the time based game mode
+    /// </summary>
+    protected int _badPizzas;
     /// <summary>
     /// The name of the gamemode
     /// </summary>
@@ -110,21 +113,15 @@ public abstract class GameHandler : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     public abstract int StartTime();
-    [SerializeField] public float _timeLeft;
-
-    int coins;
+    /// <summary>
+    /// How much time is left in the time based game mode
+    /// </summary>
+    [HideInInspector] public float _timeLeft;
 
     public virtual void Start()
     {
-        _timeLeft = StartTime();
-        goodSprite.SetActive(false);
-        faultSprite.SetActive(false);
-        GameOverCanvas.SetActive(false);
-        _resize = _pizza.GetComponent<Resize>();
-        _minSize = _boxHoleMin.transform.localScale;
-        _maxSize = new Vector3(_boxHoleMax.transform.localScale.x - 0.125f, _boxHoleMax.transform.localScale.y - 0.125f, _boxHoleMax.transform.localScale.z);
-        _playerName = PlayerPrefs.GetString("Nickname");
-        _gameInProgress = true;
+        Reset();
+        _hasBeenLoaded = true;
     }
 
     public virtual void Update()
@@ -144,7 +141,6 @@ public abstract class GameHandler : MonoBehaviour
             {
                 _gameInProgress = false;
                 HandleGameOver();
-                GameOverCanvas.SetActive(true);
                 badPizza.Play();
                 _pizza.SetActive(false);
                 _pizzaBox.SetActive(false);
@@ -156,23 +152,12 @@ public abstract class GameHandler : MonoBehaviour
         //Checks if the player released the screen/mouse and if there is currently a pizza in progress
         if (!_resize.isClicking && _pizzaInProgress)
         {
-            //Debug.Log($"pizza: {_pizza.transform.localScale.magnitude}, minSize: {_minSize.magnitude}, maxSize: {_maxSize.magnitude}");
-            //Debug.Log("Pizza was being grown but the click has been released!");
-            if (DoesNotMeetRequirments())
-            {
-                //Debug.Log("Pizza is too small so game over!");
-                HandlePizzaCompletion(false);
-            }
-            else if (MeetsRequirments())
-            {
-                //Debug.Log("Pizza is not perfect but meets the requirements!");
-                HandlePizzaCompletion(true);
-            }
-            else if (PerfectPizza())
-            {
-                //Debug.Log("Pizza is the perfect size!");
-                HandlePizzaCompletion(true, true);
-            }
+            //Checks if the pizza doesnt meet any requirments
+            if (DoesNotMeetRequirments()) HandlePizzaCompletion(false);
+            //Checks if the pizza meets the 'Nice' requirments
+            else if (MeetsRequirments()) HandlePizzaCompletion(true);
+            //Checks if hte pizza meets the 'Perfect' requirments
+            else if (PerfectPizza()) HandlePizzaCompletion(true, true);
             _pizzaInProgress = false;
         }
         else  if(_resize.isClicking) _pizzaInProgress = true;
@@ -188,6 +173,7 @@ public abstract class GameHandler : MonoBehaviour
                 //Hide both sprites
                 goodSprite.SetActive(false);
                 faultSprite.SetActive(false);
+                perfectSprite.SetActive(false);
                 //Hide the max size image
                 _boxHoleMax.SetActive(false);
                 //Sets the pizza box back in the middle
@@ -231,40 +217,60 @@ public abstract class GameHandler : MonoBehaviour
     {
         if (!correct)
         {
-            
+            //Disable the good sprite
             goodSprite.SetActive(false);
+            //Enable the fault sprite
             faultSprite.SetActive(true);
+            //Disable perfect sprite
             perfectSprite.SetActive(false);
+            //Checks if the game isnt time based
             if (!TimeBased())
-            { 
+            {
+                //Makes sure the game isnt in progress so no game logic can be ran
                 _gameInProgress = false;
+                //Handles the game over stuff
                 HandleGameOver();
-                GameOverCanvas.SetActive(true);
+                //Play the bad pizza sound
                 badPizza.Play();
+                //Disable all needed sprites so it doesnt show in the game over screen
+                faultSprite.SetActive(false);
                 _pizza.SetActive(false);
                 _pizzaBox.SetActive(false);
-                Debug.Log("Handle ending the game!");
+                //Reset text
+                _scoreText.text = "";
+                //holds the arary of all flies
+                GameObject[] flies = GameObject.FindGameObjectsWithTag("Fly");
+                //Checks if the flies isnt null
+                if (flies != null)
+                {
+                    //Loops though all the flies and removes them
+                    foreach (GameObject fly in flies)
+                    {
+                        Destroy(fly.gameObject);
+                    }
+                }
                 return;
             }
             else
-            { 
+            {
                 HandleWrongPizza();
-                flies = GameObject.FindGameObjectsWithTag("Fly");
-                foreach(GameObject fly in flies)
-                {
-                    Destroy(fly.gameObject);
-                }
-                GameOverCanvas.SetActive(true);
-                badPizza.Play();           
+                //Play the bad pizza sound
+                badPizza.Play();
+                _badPizzas++;
             }
            
         }
         else
         {
+            //Play the good pizza sound
             goodPizza.Play();
+            //show the good pizza icon
             goodSprite.SetActive(true);
+            //Disable the fault and perfect sprite
             faultSprite.SetActive(false);
             perfectSprite.SetActive(false);
+
+            _resize.GrowSpeed();
         }
         //Blocks the clicking input
         _resize.blockInput = true;
@@ -291,9 +297,53 @@ public abstract class GameHandler : MonoBehaviour
     public abstract void HandleWrongPizza();
     public virtual void HandleGameOver()
     {
+        int coinsGained = _score / 2;
+        int currentCoins = PlayerPrefs.GetInt("Coins");
+        PlayerPrefs.SetInt("Coins", currentCoins + coinsGained);
+
+        //Display game over canvas
+        GameOverCanvas.SetActive(true);
+
+        Text gameOverText = GameOverCanvas.GetComponentInChildren<Text>();
+        gameOverText.text = $"Game Over\n\n{(TimeBased() ? "Bad Pizza's: "+_badPizzas+"\n" : "")}Nice Pizza's: {_regularPizzas}\nPerfect Pizza's: {_perfectPizzas}\n\nScore: {_score}\nCoins Gained: {coinsGained}\nCurrent Coins: {PlayerPrefs.GetInt("Coins")}";
+
         _resize.blockInput = true;
+        //if(_score > 0 && !_playerName.Equals(""))
         //Highscore.instance.Insert(new HighscoreEntry(_playerName, _score, _timePassed, GameModeName()));
-        coins = _score / 2;
-        Debug.Log("your coins are " + coins);
+    }
+
+    public void Reset(bool realReset = false)
+    {
+        //Debug.Log($"GameHandler {(realReset ? "reset" : "startup")}...");
+        //Debug.Log($"Player has {PlayerPrefs.GetInt("Coins")} coins.");
+        _timeLeft = StartTime();
+        //Show the pizza
+        _pizza.SetActive(true);
+        //Make sure its a real reset else it will break the game
+        if (realReset) _pizza.transform.localScale = Vector3.zero;
+        //Show pizza box and the hole
+        _pizzaBox.SetActive(true);
+        _boxHoleMax.SetActive(true);
+        //Reset the variables to 0
+        _score = 0;
+        _perfectPizzas = 0;
+        _regularPizzas = 0;
+        _badPizzas = 0;
+        //Handles deactivating the required game objects
+        perfectSprite.SetActive(false);
+        goodSprite.SetActive(false);
+        faultSprite.SetActive(false);
+        GameOverCanvas.SetActive(false);
+        //Handles resize code
+        _resize = _pizza.GetComponent<Resize>();
+        _resize.Reset();
+        if (realReset) _resize.currentGrow = _resize.minGrow;
+        //Sets the min and max size the pizza can be
+        _minSize = _boxHoleMin.transform.localScale;
+        _maxSize = new Vector3(_boxHoleMax.transform.localScale.x - 0.125f, _boxHoleMax.transform.localScale.y - 0.125f, _boxHoleMax.transform.localScale.z);
+        //Sets the player name
+        _playerName = PlayerPrefs.GetString("Nickname");
+        //Makes it so the logic of the game is executed
+        _gameInProgress = true;
     }
 }
