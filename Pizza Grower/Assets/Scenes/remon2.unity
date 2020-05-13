@@ -9841,6 +9841,9 @@ MonoBehaviour:
   size: {x: 0, y: 0, z: 0}
   isClicking: 0
   blockInput: 0
+  minGrow: 0.0125
+  maxGrow: 0.075
+  currentGrow: 0
 --- !u!1 &1425422001
 GameObject:
   m_ObjectHideFlags: 0
@@ -10506,7 +10509,9 @@ MonoBehaviour:
   mainMenuCanas: {fileID: 253009804}
   custimizationCanas: {fileID: 1568936738}
   defaultGamemode: {fileID: 1832581287}
+  flyCatchGamemode: {fileID: 0}
   gameOverCanvas: {fileID: 1117983613}
+  selectGamemodes: {fileID: 0}
   buttonClick: {fileID: 1665227598}
   quit: {fileID: 1665227595}
   nameField: {fileID: 828606399}
@@ -12949,25 +12954,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d2616a89d216f48adbccaa89d8ccee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hasBeenLoaded: 0
   GameOverCanvas: {fileID: 1117983613}
   goodPizza: {fileID: 1665227597}
   badPizza: {fileID: 1665227596}
   goodSprite: {fileID: 330663706}
   faultSprite: {fileID: 2069820365}
   perfectSprite: {fileID: 239111381}
-  _minSize: {x: 0, y: 0, z: 0}
-  _maxSize: {x: 0, y: 0, z: 0}
   _pizza: {fileID: 1412279179}
   _pizzaBox: {fileID: 1603450199}
   _boxHoleMin: {fileID: 363720359}
   _boxHoleMax: {fileID: 159839320}
-  _pizzaInProgress: 0
-  _playerName: 
-  _score: 0
   _scoreText: {fileID: 1378621894}
-  _timePassed: 0
-  _perfectPizzas: 0
-  _regularPizzas: 0
   _timeLeft: 0
 --- !u!1 &1833270099
 GameObject:
