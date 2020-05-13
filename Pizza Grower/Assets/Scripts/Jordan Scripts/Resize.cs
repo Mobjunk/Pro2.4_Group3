@@ -21,7 +21,7 @@ public class Resize : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isClicking = Input.GetMouseButton(0) && !blockInput;
+        isClicking = Input.GetMouseButton(0) && !blockInput && TestScript.instance.allowedToGrow;
         if (isClicking && size.x < 1 && size.y < 1)
         {
             size.y += 0.0125f;

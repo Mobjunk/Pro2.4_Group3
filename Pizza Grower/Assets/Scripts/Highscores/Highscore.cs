@@ -56,13 +56,13 @@ public class Highscore : JsonHandler<HighscoreEntry>
     /// <returns>The link it uses to save/insert to</returns>
     protected override string GetInsertLink()
     {
-        return "http://mobstar-sof.com/school/insert_highscore.php";
+        return "https://mobstar-sof.com/school/insert_highscore.php";
     }
 
     public override void Start()
     {
         instance = this;
-        LoadContent(false);
+        //LoadContent(false);
         this.hasLoaded = true;
     }
 
@@ -108,7 +108,6 @@ public class Highscore : JsonHandler<HighscoreEntry>
     {
         foreach (Transform child in grid.transform)
             Destroy(child.gameObject);
-
 
         foreach (var entry in getSortedList())
         {
@@ -174,9 +173,10 @@ public class Highscore : JsonHandler<HighscoreEntry>
         form.AddField("time_played", entry.timed_played.ToString());
         form.AddField("gamemode", entry.gamemode);
 
-         //Handles sending the web quest
+        //Handles sending the web quest
         using (UnityWebRequest www = UnityWebRequest.Post(GetInsertLink(), form))
         {
+
             //Sends the web request
             yield return www.SendWebRequest();
 
