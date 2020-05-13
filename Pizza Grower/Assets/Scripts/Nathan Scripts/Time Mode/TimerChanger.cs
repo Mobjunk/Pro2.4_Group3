@@ -25,7 +25,7 @@ public class TimerChanger : GameHandler
     }
     public override void HandleNicePizza()
     {
-        _timeLeft += 3f;
+        _timeLeft += 1f;
     }
     public override void HandlePerfectPizza()
     {
@@ -33,7 +33,7 @@ public class TimerChanger : GameHandler
     }
     public override void HandleWrongPizza()
     {
-        _timeLeft -= 5f;
+        _timeLeft -= 10f;
     }
     public override void HandleGameOver()
     {
