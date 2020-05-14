@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Regular : GameHandler
+public class Flies : GameHandler
 {
     public override string GameModeName()
     {
-        return "Default";
+        return "Flies";
     }
 
     public override bool TimeBased()

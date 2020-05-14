@@ -16,17 +16,17 @@ public class HighscoreEntry
     /// <summary>
     /// The amount of time the game lasted
     /// </summary>
-    public int timed_played;
+    public int time;
     /// <summary>
     /// The game mode the player played
     /// </summary>
     public string gamemode;
 
-    public HighscoreEntry(string name, int score, int timed_played, string gamemode)
+    public HighscoreEntry(string name, int score, int time, string gamemode)
     {
         this.name = name;
         this.score = score;
-        this.timed_played = timed_played;
+        this.time = time;
         this.gamemode = gamemode;
     }
 }

@@ -18,6 +18,9 @@ public class Highscore : JsonHandler<HighscoreEntry>
     [SerializeField] private GameObject highscorePrefab;
     [SerializeField] private GameObject highscoreParent;
     [SerializeField] private GameObject grid;
+    [SerializeField] private Text title;
+    [Header("Results")]
+    [SerializeField] GameObject noResults;
     [Header("Highscore entries loaded")]
     [SerializeField] private bool hasLoaded = false;
     [Header("Sorting the list")]
@@ -109,6 +112,8 @@ public class Highscore : JsonHandler<HighscoreEntry>
         foreach (Transform child in grid.transform)
             Destroy(child.gameObject);
 
+        noResults.SetActive(getSortedList().Count == 0);
+
         foreach (var entry in getSortedList())
         {
             //Spawns the prefab inside the grid
@@ -123,10 +128,12 @@ public class Highscore : JsonHandler<HighscoreEntry>
             var score = entryObject.transform.GetChild(1);
             var time_played = entryObject.transform.GetChild(2);
 
+            //Debug.Log("entry.timed_played: " + entry.timed_played);
+
             //Sets the name, score and time played
             playerName.GetComponent<Text>().text = $"{entry.name}";
             score.GetComponent<Text>().text = $"{entry.score}";
-            time_played.GetComponent<Text>().text = $"{entry.timed_played}";
+            time_played.GetComponent<Text>().text = $"{entry.time}";
         }
     }
 
@@ -154,6 +161,7 @@ public class Highscore : JsonHandler<HighscoreEntry>
         if (sortingBy.Equals(sort)) return;
 
         sortingBy = sort;
+        title.text = $"Highscores - {sort}";
         SetupUI();
     }
 
@@ -170,13 +178,12 @@ public class Highscore : JsonHandler<HighscoreEntry>
         //Fills the form with the required data
         form.AddField("name", entry.name);
         form.AddField("score", entry.score.ToString());
-        form.AddField("time_played", entry.timed_played.ToString());
+        form.AddField("time", entry.time.ToString());
         form.AddField("gamemode", entry.gamemode);
 
         //Handles sending the web quest
         using (UnityWebRequest www = UnityWebRequest.Post(GetInsertLink(), form))
         {
-
             //Sends the web request
             yield return www.SendWebRequest();
 

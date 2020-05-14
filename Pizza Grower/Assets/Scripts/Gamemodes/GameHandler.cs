@@ -191,6 +191,7 @@ public abstract class GameHandler : MonoBehaviour
                 _movingLeft = false;
                 //Reset the resizing (Input & size)
                 _resize.Reset();
+                FlySpawner.AllowFly = true;
             }
         }
     }
@@ -222,7 +223,6 @@ public abstract class GameHandler : MonoBehaviour
 
     public virtual void HandlePizzaCompletion(bool correct, bool perfect = false)
     {
-        Debug.Log("AAAA");
         if (!correct)
         {
             //Disable the good sprite
@@ -261,7 +261,7 @@ public abstract class GameHandler : MonoBehaviour
         }
         else
         {
-            RemoveFlies(true);
+            RemoveFlies();
             //Play the good pizza sound
             goodPizza.Play();
             //show the good pizza icon
@@ -307,8 +307,11 @@ public abstract class GameHandler : MonoBehaviour
         gameOverText.text = $"Game Over\n\n{(TimeBased() ? "Bad Pizza's: "+_badPizzas+"\n" : "")}Nice Pizza's: {_regularPizzas}\nPerfect Pizza's: {_perfectPizzas}\n\nScore: {_score}\nCoins Gained: {coinsGained}\nCurrent Coins: {PlayerPrefs.GetInt("Coins")}";
 
         _resize.blockInput = true;
-        //if(_score > 0 && !_playerName.Equals(""))
-        //Highscore.instance.Insert(new HighscoreEntry(_playerName, _score, _timePassed, GameModeName()));
+        if (_score > 0 && !_playerName.Equals(""))
+        {
+            Debug.Log($"_timePassed: {_timePassed}");
+            Highscore.instance.Insert(new HighscoreEntry(_playerName, _score, _timePassed, GameModeName()));
+        }
     }
 
     public void Reset(bool realReset = false)
@@ -350,14 +353,14 @@ public abstract class GameHandler : MonoBehaviour
         FlySpawner.AllowFly = true;
     }
 
-    protected void RemoveFlies(bool cannotSpawn = false)
+    protected void RemoveFlies()
     {
         //holds the arary of all flies
         GameObject[] flies = GameObject.FindGameObjectsWithTag("Fly");
         //Checks if the flies isnt null
         if (flies != null)
         {
-            FlySpawner.AllowFly = cannotSpawn;
+            FlySpawner.AllowFly = false;
             //Loops though all the flies and removes them
             foreach (GameObject fly in flies)
             {

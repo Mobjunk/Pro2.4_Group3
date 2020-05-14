@@ -94,7 +94,6 @@ public abstract class JsonHandler<T> : MonoBehaviour
         {
             if (!File.Exists($"{GetPath()}{GetFileName()}")) return;
 
-            
             //Read the json file
             //And closes the stream reader
             var reader = new StreamReader($"{GetPath()}{GetFileName()}");
@@ -120,12 +119,12 @@ public abstract class JsonHandler<T> : MonoBehaviour
         finishedLoading = true;
     }
 
-    private IEnumerator  StartReadingText()
+    private IEnumerator StartReadingText()
     {
         WWW www = new WWW(GetLink());
-         
+
         yield return www;
-         
+
         if (www.error == null)
         {
             jsonString = www.text;

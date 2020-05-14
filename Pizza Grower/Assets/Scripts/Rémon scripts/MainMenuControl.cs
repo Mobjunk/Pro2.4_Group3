@@ -1,10 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class MainMenuControl : MonoBehaviour
 {
+
+    [Header("Checking username availablity")]
+    private string _websiteResponse = "";
+    private bool _finishedResponse = false;
+    [SerializeField] Text _feedbackText;
+    private float _feedbackTimer;
+
+    [Header("All game objects")]
     public GameObject instructionsCanvas;
     public GameObject highscoreCanvas;
     public GameObject mainMenuCanas;
@@ -38,13 +47,30 @@ public class MainMenuControl : MonoBehaviour
 
     private void Update()
     {
-        if (nameField.text == "")
+        if (_finishedResponse)
         {
-            //....
+            Debug.Log($"response: {_websiteResponse}");
+            if (_websiteResponse.Equals("This username is currently free."))
+            {
+                SetFeedback("Your nickname has been changed succesfully!");
+                PlayerPrefs.SetString("Nickname", nameField.text);
+            }
+            else 
+            {
+                SetFeedback("This nickname is already in use!");
+                nameField.text = "";
+            }
+            _finishedResponse = false;
         }
-        if (nameField.text != "")
+
+        if(_feedbackTimer > 0)
         {
-            //....
+            _feedbackTimer -= Time.deltaTime;
+            if(_feedbackTimer <= 0)
+            {
+                _feedbackText.text = "";
+                _feedbackTimer = 0;
+            }
         }
     }
 
@@ -63,6 +89,12 @@ public class MainMenuControl : MonoBehaviour
 
     public void Play()
     {
+        if (nameField.text.Equals(""))
+        {
+            //TODO: Make something show up telling the player he needs to fill in a name
+            SetFeedback("Please set a nickname before you start playing!");
+            return;
+        }
         mainMenuCanas.SetActive(false);
         instructionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
@@ -131,7 +163,7 @@ public class MainMenuControl : MonoBehaviour
     {
         selectGamemodes.SetActive(false);
         flyCatchGamemode.SetActive(true);
-        GameHandler gameHandler = flyCatchGamemode.GetComponent<Regular>();
+        GameHandler gameHandler = flyCatchGamemode.GetComponent<Flies>();
         if (gameHandler != null) gameHandler.Reset(gameHandler._hasBeenLoaded);
     }
 
@@ -139,13 +171,12 @@ public class MainMenuControl : MonoBehaviour
     {
         selectGamemodes.SetActive(false);
         timeGamemode.SetActive(true);
-        Debug.Log("Tester");
         GameHandler gameHandler = timeGamemode.GetComponent<TimerChanger>();
         if (gameHandler != null) gameHandler.Reset(gameHandler._hasBeenLoaded);
     }
 
 
-    public void Quit() 
+    public void Quit()
     {
         Application.Quit();
         quit.Play();
@@ -155,9 +186,40 @@ public class MainMenuControl : MonoBehaviour
     {
         if (nameField.text != "")
         {
-            PlayerPrefs.SetString("Nickname", nameField.text);
+            StartCoroutine(CheckAvailablity(nameField.text));
+            //Debug.Log("Name has been saved test");
+            //PlayerPrefs.SetString("Nickname", nameField.text);
         }
     }
 
+    private IEnumerator CheckAvailablity(string name)
+    {
+        //Creates a new form
+        WWWForm form = new WWWForm();
+
+        //Fills the form with the required data
+        form.AddField("name", name);
+
+        //Handles sending the web quest
+        using (UnityWebRequest www = UnityWebRequest.Post("https://mobstar-sof.com/school/existing_user.php", form))
+        {
+
+            //Sends the web request
+            yield return www.SendWebRequest();
+
+            //Checks if there is no error
+            if (!www.isNetworkError && !www.isHttpError)
+            {
+                _websiteResponse = www.downloadHandler.text;
+                _finishedResponse = true;
+            }
+        }
+    }
+
+    private void SetFeedback(string message)
+    {
+        _feedbackText.text = message;
+        _feedbackTimer = 4;
+    }
 }
 
