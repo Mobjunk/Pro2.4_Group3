@@ -144,6 +144,8 @@ public abstract class GameHandler : MonoBehaviour
                 badPizza.Play();
                 _pizza.SetActive(false);
                 _pizzaBox.SetActive(false);
+                faultSprite.SetActive(false);
+                _scoreText.text = "";
                 Debug.Log("Handle ending the game!");
                 return;
             }
@@ -220,6 +222,7 @@ public abstract class GameHandler : MonoBehaviour
 
     protected virtual void HandlePizzaCompletion(bool correct, bool perfect = false)
     {
+        Debug.Log("AAAA");
         if (!correct)
         {
             //Disable the good sprite
@@ -243,17 +246,7 @@ public abstract class GameHandler : MonoBehaviour
                 _pizzaBox.SetActive(false);
                 //Reset text
                 _scoreText.text = "";
-                //holds the arary of all flies
-                GameObject[] flies = GameObject.FindGameObjectsWithTag("Fly");
-                //Checks if the flies isnt null
-                if (flies != null)
-                {
-                    //Loops though all the flies and removes them
-                    foreach (GameObject fly in flies)
-                    {
-                        Destroy(fly.gameObject);
-                    }
-                }
+                RemoveFlies();
                 return;
             }
             else
@@ -268,6 +261,7 @@ public abstract class GameHandler : MonoBehaviour
         }
         else
         {
+            RemoveFlies(true);
             //Play the good pizza sound
             goodPizza.Play();
             //show the good pizza icon
@@ -319,8 +313,8 @@ public abstract class GameHandler : MonoBehaviour
 
     public void Reset(bool realReset = false)
     {
-        //Debug.Log($"GameHandler {(realReset ? "reset" : "startup")}...");
-        //Debug.Log($"Player has {PlayerPrefs.GetInt("Coins")} coins.");
+        Debug.Log($"GameHandler {(realReset ? "reset" : "startup")}...");
+        Debug.Log($"Player has {PlayerPrefs.GetInt("Coins")} coins.");
         _timeLeft = StartTime();
         //Show the pizza
         _pizza.SetActive(true);
@@ -343,6 +337,7 @@ public abstract class GameHandler : MonoBehaviour
         //Handles resize code
         _resize = _pizza.GetComponent<Resize>();
         _resize.Reset();
+        _resize.isClicking = false;
         if (realReset) _resize.currentGrow = _resize.minGrow;
         //Sets the min and max size the pizza can be
         _minSize = _boxHoleMin.transform.localScale;
@@ -351,5 +346,23 @@ public abstract class GameHandler : MonoBehaviour
         _playerName = PlayerPrefs.GetString("Nickname");
         //Makes it so the logic of the game is executed
         _gameInProgress = true;
+
+        FlySpawner.AllowFly = true;
+    }
+
+    protected void RemoveFlies(bool cannotSpawn = false)
+    {
+        //holds the arary of all flies
+        GameObject[] flies = GameObject.FindGameObjectsWithTag("Fly");
+        //Checks if the flies isnt null
+        if (flies != null)
+        {
+            FlySpawner.AllowFly = cannotSpawn;
+            //Loops though all the flies and removes them
+            foreach (GameObject fly in flies)
+            {
+                Destroy(fly.gameObject);
+            }
+        }
     }
 }

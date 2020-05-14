@@ -131,7 +131,7 @@ public class MainMenuControl : MonoBehaviour
     {
         selectGamemodes.SetActive(false);
         flyCatchGamemode.SetActive(true);
-        GameHandler gameHandler = defaultGamemode.GetComponent<Regular>();
+        GameHandler gameHandler = flyCatchGamemode.GetComponent<Regular>();
         if (gameHandler != null) gameHandler.Reset(gameHandler._hasBeenLoaded);
     }
 
@@ -139,7 +139,8 @@ public class MainMenuControl : MonoBehaviour
     {
         selectGamemodes.SetActive(false);
         timeGamemode.SetActive(true);
-        GameHandler gameHandler = defaultGamemode.GetComponent<TimerChanger>();
+        Debug.Log("Tester");
+        GameHandler gameHandler = timeGamemode.GetComponent<TimerChanger>();
         if (gameHandler != null) gameHandler.Reset(gameHandler._hasBeenLoaded);
     }
 

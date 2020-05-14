@@ -7961,7 +7961,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937036893}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -12420,9 +12420,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hasBeenLoaded: 0
-  GameOverCanvas: {fileID: 0}
-  goodPizza: {fileID: 0}
-  badPizza: {fileID: 0}
+  GameOverCanvas: {fileID: 1117983613}
+  goodPizza: {fileID: 1665227598}
+  badPizza: {fileID: 1665227598}
   goodSprite: {fileID: 778122655}
   faultSprite: {fileID: 798160851}
   perfectSprite: {fileID: 142247342}

@@ -9,7 +9,7 @@ public class FlyDetection : MonoBehaviour
         if (other.gameObject.CompareTag("Pizza"))
         {
             FlySpawner.AllowFly = false;
-            //Debug.Log("touched");
+            Debug.Log("touched");
             // Game Over Screen Code Here;
         }
     }

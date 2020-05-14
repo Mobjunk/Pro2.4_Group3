@@ -12,7 +12,7 @@ public class Resize : MonoBehaviour
     [HideInInspector] public bool blockInput = false;
 
     public float minGrow = 0.0125f;
-    public float maxGrow = 0.05f;
+    public float maxGrow = 0.03f;
     public float currentGrow;
 
     // Start is called before the first frame update
@@ -33,7 +33,6 @@ public class Resize : MonoBehaviour
             size.x += currentGrow;
             transform.Rotate(rotation * Time.deltaTime);
             transform.localScale = size;
-            Debug.Log(currentGrow);
         }
     }
 

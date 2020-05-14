@@ -40,6 +40,7 @@ public class TimerChanger : GameHandler
     public override void HandleGameOver()
     {
         base.HandleGameOver();
+        gameTimer.text = "";
     }
 
 
@@ -50,8 +51,8 @@ public class TimerChanger : GameHandler
 
     // Update is called once per frame
     public override void Update()
-    {        
-        gameTimer.text = _timeLeft.ToString("F0");
+    {
+        if(_gameInProgress) gameTimer.text = _timeLeft.ToString("F0");
         base.Update();
     }
 }
