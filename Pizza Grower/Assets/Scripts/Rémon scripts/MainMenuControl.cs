@@ -10,6 +10,7 @@ public class MainMenuControl : MonoBehaviour
     [Header("Checking username availablity")]
     private string _websiteResponse = "";
     private bool _finishedResponse = false;
+    [SerializeField] Text coinText;
     [SerializeField] Text _feedbackText;
     private float _feedbackTimer;
 
@@ -47,6 +48,7 @@ public class MainMenuControl : MonoBehaviour
 
     private void Update()
     {
+        coinText.text = $" x {PlayerPrefs.GetInt("Coins")}";
         if (_finishedResponse)
         {
             Debug.Log($"response: {_websiteResponse}");
