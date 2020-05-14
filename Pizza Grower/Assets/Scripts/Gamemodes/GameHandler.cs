@@ -254,6 +254,7 @@ public abstract class GameHandler : MonoBehaviour
             else
             {
                 HandleWrongPizza();
+                _resize.GrowSpeed();
                 //Play the bad pizza sound
                 badPizza.Play();
                 _badPizzas++;
@@ -269,27 +270,26 @@ public abstract class GameHandler : MonoBehaviour
             //Disable the fault and perfect sprite
             faultSprite.SetActive(false);
             perfectSprite.SetActive(false);
-
             _resize.GrowSpeed();
+            //Increase the pizza counters based on perfection
+            if (perfect)
+            {
+                HandlePerfectPizza();
+                _perfectPizzas++;
+                perfectSprite.SetActive(true);
+                goodSprite.SetActive(false);
+                faultSprite.SetActive(false);
+            }
+            else
+            {
+                HandleNicePizza();
+                _regularPizzas++;
+            }
         }
         //Blocks the clicking input
         _resize.blockInput = true;
         //Starts moving the pizza box to the left
-        _movingLeft = true;
-        //Increase the pizza counters based on perfection
-        if (perfect)
-        {
-            HandlePerfectPizza();
-            _perfectPizzas++;
-            perfectSprite.SetActive(true);
-            goodSprite.SetActive(false);
-            faultSprite.SetActive(false);
-        }
-        else
-        {
-            HandleNicePizza();
-            _regularPizzas++;
-        }
+        _movingLeft = true;  
     }
 
     public abstract void HandleNicePizza();
