@@ -148,7 +148,7 @@ public abstract class GameHandler : MonoBehaviour
                 return;
             }
         }
-        
+
         //Checks if the player released the screen/mouse and if there is currently a pizza in progress
         if (!_resize.isClicking && _pizzaInProgress)
         {
@@ -160,7 +160,12 @@ public abstract class GameHandler : MonoBehaviour
             else if (PerfectPizza()) HandlePizzaCompletion(true, true);
             _pizzaInProgress = false;
         }
-        else  if(_resize.isClicking) _pizzaInProgress = true;
+        else if (_resize.isClicking)
+        {
+            //Make sure the game ends when the pizza reaches max
+            if(_pizza.transform.localScale.magnitude > _maxSize.magnitude + 0.05) HandlePizzaCompletion(false);
+            _pizzaInProgress = true;
+        }
 
         //Checks if the input of the player has been blocked and if there is no pizza in progress
         if (_resize.blockInput && !_pizzaInProgress && _movingLeft)
@@ -329,6 +334,7 @@ public abstract class GameHandler : MonoBehaviour
         _perfectPizzas = 0;
         _regularPizzas = 0;
         _badPizzas = 0;
+        _pizzaInProgress = false;
         //Handles deactivating the required game objects
         perfectSprite.SetActive(false);
         goodSprite.SetActive(false);

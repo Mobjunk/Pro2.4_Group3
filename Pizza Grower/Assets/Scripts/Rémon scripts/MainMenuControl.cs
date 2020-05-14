@@ -10,7 +10,10 @@ public class MainMenuControl : MonoBehaviour
     public GameObject mainMenuCanas;
     public GameObject custimizationCanas;
     public GameObject defaultGamemode;
+    public GameObject flyCatchGamemode;
+    public GameObject timeGamemode;
     public GameObject gameOverCanvas;
+    public GameObject selectGamemodes;
 
     [Header("Sounds")]
     public AudioSource buttonClick;
@@ -28,6 +31,9 @@ public class MainMenuControl : MonoBehaviour
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
         gameOverCanvas.SetActive(false);
+        selectGamemodes.SetActive(false);
+        flyCatchGamemode.SetActive(false);
+        timeGamemode.SetActive(false);
     }
 
     private void Update()
@@ -49,7 +55,8 @@ public class MainMenuControl : MonoBehaviour
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
         defaultGamemode.SetActive(false);
-        gameOverCanvas.SetActive(false);
+        flyCatchGamemode.SetActive(false);
+        timeGamemode.SetActive(false);
         gameOverCanvas.SetActive(false);
         buttonClick.Play();
     }
@@ -60,8 +67,9 @@ public class MainMenuControl : MonoBehaviour
         instructionsCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         custimizationCanas.SetActive(false);
-        defaultGamemode.SetActive(true);
+        defaultGamemode.SetActive(false);
         gameOverCanvas.SetActive(false);
+        selectGamemodes.SetActive(true);
         buttonClick.Play();
     }
 
@@ -108,6 +116,31 @@ public class MainMenuControl : MonoBehaviour
         defaultGamemode.SetActive(false);
         gameOverCanvas.SetActive(false);
         buttonClick.Play();
+    }
+
+    public void DefaultGamemode()
+    {
+        selectGamemodes.SetActive(false);
+        defaultGamemode.SetActive(true);
+        buttonClick.Play();
+        GameHandler gameHandler = defaultGamemode.GetComponent<Regular>();
+        if (gameHandler != null) gameHandler.Reset(gameHandler._hasBeenLoaded);
+    }
+
+    public void FlyCatchGamemode()
+    {
+        selectGamemodes.SetActive(false);
+        flyCatchGamemode.SetActive(true);
+        GameHandler gameHandler = defaultGamemode.GetComponent<Regular>();
+        if (gameHandler != null) gameHandler.Reset(gameHandler._hasBeenLoaded);
+    }
+
+    public void TimeGamemode()
+    {
+        selectGamemodes.SetActive(false);
+        timeGamemode.SetActive(true);
+        GameHandler gameHandler = defaultGamemode.GetComponent<TimerChanger>();
+        if (gameHandler != null) gameHandler.Reset(gameHandler._hasBeenLoaded);
     }
 
 
