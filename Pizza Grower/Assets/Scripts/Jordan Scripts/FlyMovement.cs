@@ -25,12 +25,9 @@ public class FlyMovement : MonoBehaviour
         }
     }
 
-    private void OnMouseOver()
+    public void DestroyThis()
     {
-        if (Input.GetMouseButtonUp(0))
-        {
-            Destroy(this.gameObject);
-        }
+        Destroy(this.gameObject);
     }
 
     void Lookat()

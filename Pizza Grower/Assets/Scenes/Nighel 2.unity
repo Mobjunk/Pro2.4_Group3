@@ -2337,7 +2337,7 @@ MonoBehaviour:
   isClicking: 0
   blockInput: 0
   minGrow: 0.0125
-  maxGrow: 0.05
+  maxGrow: 0.03
   currentGrow: 0
 --- !u!114 &255324622
 MonoBehaviour:
@@ -8007,7 +8007,7 @@ MonoBehaviour:
   isClicking: 0
   blockInput: 0
   minGrow: 0.0125
-  maxGrow: 0.05
+  maxGrow: 0.03
   currentGrow: 0
 --- !u!114 &937036898
 MonoBehaviour:
@@ -11556,7 +11556,7 @@ MonoBehaviour:
   isClicking: 0
   blockInput: 0
   minGrow: 0.0125
-  maxGrow: 0.05
+  maxGrow: 0.03
   currentGrow: 0
 --- !u!1 &1425422001
 GameObject:
