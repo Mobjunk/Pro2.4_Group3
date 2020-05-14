@@ -18,6 +18,7 @@ public class CosmeticHandler : MonoBehaviour
 
     private void Awake()
     {
+        PlayerPrefs.SetInt($"unlocked:0", 1);
         instance = this;
 
         cosmeticDefinition.Sort((a, b) => a.id.CompareTo(b.id));
@@ -65,8 +66,8 @@ public class CosmeticHandler : MonoBehaviour
 
     public void SwitchSkin(int pizzaIndex)
     {
-        Debug.Log("pizzaIndex: " + pizzaIndex);
         PlayerPrefs.SetInt("Skin", pizzaIndex);
+        SetFeedback("You have switched the skin!");
     }
 
     public void PurchaseSkin()

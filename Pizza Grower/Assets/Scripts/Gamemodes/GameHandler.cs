@@ -131,7 +131,7 @@ public abstract class GameHandler : MonoBehaviour
         //Update the time passed in the gamemode
         _timer += Time.deltaTime;
         _timePassed = (int)_timer % 60;
-        _scoreText.text = "Score: " + _score;
+        _scoreText.text = $"Score: {_score}";
 
         //Checks if its a time based game mode
         if(TimeBased())
@@ -351,6 +351,8 @@ public abstract class GameHandler : MonoBehaviour
         _gameInProgress = true;
 
         FlySpawner.AllowFly = true;
+
+        if(SkinSetter.instance != null) SkinSetter.instance.SkinChecker();
     }
 
     protected void RemoveFlies()
