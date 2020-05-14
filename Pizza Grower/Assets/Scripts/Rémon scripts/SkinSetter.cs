@@ -23,6 +23,8 @@ public class SkinSetter : MonoBehaviour
 
     public void SkinChecker()
     {
-        texture.sprite = pizzaSprites[PlayerPrefs.GetInt("Skin") - 1];
+        Debug.Log("PlayerPrefs.GetInt: " + PlayerPrefs.GetInt("Skin"));
+        
+        texture.sprite = CosmeticHandler.instance.cosmeticDefinition[PlayerPrefs.GetInt("Skin")].sprite;
     }
 }
