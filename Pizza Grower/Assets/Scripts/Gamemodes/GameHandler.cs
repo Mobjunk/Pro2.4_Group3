@@ -220,7 +220,7 @@ public abstract class GameHandler : MonoBehaviour
         return _pizza.transform.localScale.magnitude >= _maxSize.magnitude - 0.05 && _pizza.transform.localScale.magnitude <= _maxSize.magnitude + 0.05;
     }
 
-    protected virtual void HandlePizzaCompletion(bool correct, bool perfect = false)
+    public virtual void HandlePizzaCompletion(bool correct, bool perfect = false)
     {
         Debug.Log("AAAA");
         if (!correct)
