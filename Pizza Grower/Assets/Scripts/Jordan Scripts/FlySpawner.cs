@@ -14,7 +14,7 @@ public class FlySpawner : MonoBehaviour
     private float x1;
     private float y1;
     private int number;
-    private float nextSpawn = 1.5f;
+    private float nextSpawn = 1.25f;
     private float Spawned = 0f;
     public static bool AllowFly = true;
 

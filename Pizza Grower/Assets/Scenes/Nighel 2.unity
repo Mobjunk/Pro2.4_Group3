@@ -8281,8 +8281,8 @@ MonoBehaviour:
   size: {x: 0, y: 0, z: 0}
   isClicking: 0
   blockInput: 0
-  minGrow: 0.0125
-  maxGrow: 0.03
+  minGrow: 0.0065
+  maxGrow: 0.0125
   currentGrow: 0
 --- !u!114 &937036898
 MonoBehaviour:
